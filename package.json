@@ -1,0 +1,32 @@
+{
+  "name": "three-effectcomposer",
+  "version": "0.0.1",
+  "description": "@alteredq's EffectComposer plugin for three.js ported for use with Browserify",
+  "main": "index.js",
+  "scripts": {
+    "demo": "node_modules/.bin/browserify demo.js -o bundle.js && echo 'open index.html'"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "three-copyshader": "0.0.1"
+  },
+  "devDependencies": {
+    "three": "~0.55.0",
+    "browserify": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hughsk/three-effectcomposer.git"
+  },
+  "keywords": [
+    "three",
+    "composer",
+    "effect",
+    "post",
+    "processing",
+    "shader",
+    "fragment",
+    "render"
+  ],
+  "author": "alteredq (http://alteredqualia.com/)"
+}
