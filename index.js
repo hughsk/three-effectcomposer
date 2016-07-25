@@ -6,6 +6,7 @@ module.exports = function(THREE) {
   var CopyShader = EffectComposer.CopyShader = require('three-copyshader')
     , RenderPass = EffectComposer.RenderPass = require('./lib/renderpass')(THREE)
     , ShaderPass = EffectComposer.ShaderPass = require('./lib/shaderpass')(THREE, EffectComposer)
+    , TexturePass = EffectComposer.TexturePass = require('./lib/texturepass')(THREE, EffectComposer)
     , MaskPass = EffectComposer.MaskPass = require('./lib/maskpass')(THREE)
     , ClearMaskPass = EffectComposer.ClearMaskPass = require('./lib/clearmaskpass')(THREE)
 
