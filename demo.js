@@ -4,6 +4,7 @@
  */
 var camera, scene, renderer, composer;
 var object, light;
+var dsEffect;
 
 var THREE = require('three')
   , EffectComposer = require('./')(THREE)
@@ -72,6 +73,8 @@ THREE.RGBShiftShader = {
   ].join("\n")
 };
 
+
+
 init();
 animate();
 
@@ -91,7 +94,7 @@ function init() {
   scene.add( object );
 
   var geometry = new THREE.SphereGeometry( 1, 4, 4 );
-  var material = new THREE.MeshPhongMaterial( { color: 0xffffff, shading: THREE.FlatShading } );
+  var material = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true } );
 
   for ( var i = 0; i < 100; i ++ ) {
 
@@ -115,27 +118,32 @@ function init() {
   composer = new EffectComposer( renderer );
   composer.addPass( new EffectComposer.RenderPass( scene, camera ) );
 
-  var effect = new EffectComposer.ShaderPass( THREE.DotScreenShader );
-  effect.uniforms[ 'scale' ].value = 4;
-  composer.addPass( effect );
+  dsEffect = new EffectComposer.ShaderPass( THREE.DotScreenShader );
+  composer.addPass( dsEffect );
 
   var effect = new EffectComposer.ShaderPass( THREE.RGBShiftShader );
   effect.uniforms[ 'amount' ].value = 0.0015;
   effect.renderToScreen = true;
   composer.addPass( effect );
 
-  //
-
   window.addEventListener( 'resize', onWindowResize, false );
+  onWindowResize();
 
 }
 
 function onWindowResize() {
 
-  camera.aspect = window.innerWidth / window.innerHeight;
+  var w = window.innerWidth;
+  var h = window.innerHeight;
+
+  camera.aspect = w / h;
   camera.updateProjectionMatrix();
 
-  renderer.setSize( window.innerWidth, window.innerHeight );
+  renderer.setSize( w, h );
+  composer.setSize( w, h );
+
+  //some passes need screen resolution passed in
+  dsEffect.uniforms.tSize.value = new THREE.Vector2(w,h);
 
 }
 

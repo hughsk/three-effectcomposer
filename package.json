@@ -11,7 +11,7 @@
     "three-copyshader": "0.0.1"
   },
   "devDependencies": {
-    "three": "~0.55.0",
+    "three": "~0.88.0",
     "browserify": "*"
   },
   "repository": {
