@@ -122,12 +122,14 @@ module.exports = function(THREE) {
 
     setSize: function ( width, height ) {
 
-      var renderTarget = this.renderTarget1.clone();
+      this.renderTarget1.setSize( width, height );
+      this.renderTarget2.setSize( width, height );
 
-      renderTarget.width = width;
-      renderTarget.height = height;
-
-      this.reset( renderTarget );
+      for ( var i = 0; i < this.passes.length; i ++ ) {
+        if (typeof this.passes[i].setSize === "function") { 
+          this.passes[i].setSize( width, height );
+        }
+      }
 
     }
 
